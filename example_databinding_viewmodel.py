@@ -5,7 +5,10 @@ ViewModel.
 """
 
 import clr
-clr.AddReferenceToFile("./InfrastructureAssemblies/Livet.dll")
+import os.path as path
+from sys import path as systemPath
+systemPath.append(path.join(path.dirname(__file__), "InfrastructureAssemblies"))
+clr.AddReferenceToFile("Livet.dll")
 from Livet import ViewModel as BindableBase
 from Livet.Commands import ViewModelCommand as DelegateCommand
 
@@ -14,6 +17,16 @@ class Example_databinding_viewmodel(BindableBase):
     def __init__(self):
         # Set command.
         self.Run_Btn_One_Command = DelegateCommand(self.Run_Btn_One)
+        # Init command.
+        self.InitCommand = DelegateCommand(self.Init)
+        # Close command.
+        self.CloseCommand = DelegateCommand(self.Close)
+        
+    def Close(self):
+        print("Close")
+        
+    def Init(self):
+        print("Init")
 
     # Txt_One property.
     _Txt_One = 1.0
