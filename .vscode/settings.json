@@ -1,4 +1,4 @@
 {
     "python.linting.pylintEnabled": false,
-    "python.pythonPath": "C:/IronPython27/ipy.exe"
+    "python.pythonPath": "C:/Tools/IronPython34/ipy.exe""
 }
