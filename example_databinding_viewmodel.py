@@ -8,25 +8,29 @@ import clr
 import os.path as path
 from sys import path as systemPath
 systemPath.append(path.join(path.dirname(__file__), "InfrastructureAssemblies"))
-clr.AddReferenceToFile("Livet.dll")
-from Livet import ViewModel as BindableBase
-from Livet.Commands import ViewModelCommand as DelegateCommand
+clr.AddReferenceToFile("Livet.Behaviors.dll")
+clr.AddReferenceToFile("Livet.Core.dll")
+clr.AddReferenceToFile("Livet.Mvvm.dll")
+clr.AddReferenceToFile("Microsoft.Xaml.Behaviors.dll")
+from Livet import ViewModel
+from Livet.Commands import ViewModelCommand
 
-class Example_databinding_viewmodel(BindableBase):
+class Example_databinding_viewmodel(ViewModel):
 
     def __init__(self):
+        print("viewmodel.__Init__")
         # Set command.
-        self.Run_Btn_One_Command = DelegateCommand(self.Run_Btn_One)
+        self.Run_Btn_One_Command = ViewModelCommand(self.Run_Btn_One)
         # Init command.
-        self.InitCommand = DelegateCommand(self.Init)
+        self.Init = ViewModelCommand(self.Init)
         # Close command.
-        self.CloseCommand = DelegateCommand(self.Close)
-        
-    def Close(self):
-        print("Close")
+        self.Closed = ViewModelCommand(self.Closed)
         
     def Init(self):
         print("Init")
+
+    def Closed(self):
+        print("Close")
 
     # Txt_One property.
     _Txt_One = 1.0

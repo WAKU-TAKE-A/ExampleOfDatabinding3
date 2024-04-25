@@ -1,17 +1,21 @@
-<Window 
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:vm="example_databinding_viewmodel"
     Title="Example of data binding" Height="300" Width="300">
 
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="ContentRendered">
-            <i:InvokeCommandAction Command="{Binding Path=InitCommand}" />
-        </i:EventTrigger>
+    <bh:Interaction.Triggers>
 
-        <i:EventTrigger EventName="Closed">
-            <i:InvokeCommandAction Command="{Binding Path=CloseCommand}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+        <bh:EventTrigger EventName="ContentRendered">
+            <bh:InvokeCommandAction Command="{Binding Path=Init}" />
+        </bh:EventTrigger>
+
+        <bh:EventTrigger EventName="Closed">
+            <bh:InvokeCommandAction Command="{Binding Path=Closed}" />
+        </bh:EventTrigger>
+
+    </bh:Interaction.Triggers>
 
     <StackPanel>
         <TextBox Name="txtOne" Text="{Binding Path=Txt_One, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -19,4 +23,5 @@
         <Button Content="Copy the above number." Command="{Binding Path=Run_Btn_One_Command}"/>
         <TextBox Text="{Binding Path=Txt_Two, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
+
 </Window>
